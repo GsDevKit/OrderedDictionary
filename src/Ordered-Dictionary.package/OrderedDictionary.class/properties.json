@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "Collection",
+	"category" : "Ordered-Dictionary",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"dictionary",
+		"orderedKeys"
+	],
+	"name" : "OrderedDictionary",
+	"type" : "variable"
+}
