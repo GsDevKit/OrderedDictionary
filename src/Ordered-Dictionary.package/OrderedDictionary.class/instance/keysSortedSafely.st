@@ -1,3 +1,3 @@
 accessing
 keysSortedSafely
-  ^ dictionary keysSortedSafely
+  ^ dictionary keysSortedSafely asArray
