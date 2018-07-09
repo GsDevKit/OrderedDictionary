@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "",
 	"super" : "OrderedDictionaryTest",
-	"category" : "Ordered-Dictionary-Test",
+	"category" : "Ordered-Dictionary-Tests",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
