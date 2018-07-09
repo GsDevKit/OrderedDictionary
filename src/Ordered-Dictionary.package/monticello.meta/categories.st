@@ -1,2 +1,1 @@
-SystemOrganization addCategory: #'Ordered-Dictionary'!
-ystemOrganization addCategory: 'Ordered-Dictionary-Test'!
+SystemOrganization addCategory: 'Ordered-Dictionary'!
