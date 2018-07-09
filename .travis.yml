@@ -1,0 +1,14 @@
+language: smalltalk
+sudo: false
+
+os:
+- linux
+- osx
+
+smalltalk:
+  - GemStone-3.4.1
+    
+# This make Gemstone builds 3x faster
+cache:
+  directories:
+    - $SMALLTALK_CI_CACHE
