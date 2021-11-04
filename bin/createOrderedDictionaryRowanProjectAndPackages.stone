@@ -67,22 +67,22 @@ doit
 			'Ordered-Dictionary-Tests'.
 		}.
 
-	('$ROWAN_PROJECTS_HOME' asFileReference / projectName / 'gs' / 'rowan') ensureDeleteAll.
+	('$ROWAN_PROJECTS_HOME' asFileReference / projectName / 'rowan') ensureDeleteAll.
 
 	definedProject := Rowan newProjectNamed: projectName.
 	definedProject
 		gemstoneSetDefaultSymbolDictNameTo: 'Globals';
 		repoType: #git;	
 		customConditionalAttributes: #('tests' );
-		packageFormat: 'tonel';
+		packageFormat: 'filetree';
 		packageConvention: 'Monticello';
-		projectSpecPath: 'gs/rowan';	
-		projectsPath: 'gs/rowan/projects';
-		specsPath: 'gs/rowan/specs';
-		projectsPath: 'gs/rowan/projects';
-		projectSpecFile: 'gs/rowan/project.ston';
+		projectSpecPath: 'rowan';	
+		projectsPath: 'rowan/projects';
+		specsPath: 'rowan/specs';
+		projectsPath: 'rowan/projects';
+		projectSpecFile: 'rowan/project.ston';
 		packagesPath: 'src';
-		componentsPath: 'gs/rowan/components';
+		componentsPath: 'rowan/components';
 		yourself.
 	definedProject addTopLevelComponentNamed: componentName.
 	commonPackageNames do: [:packageName |
