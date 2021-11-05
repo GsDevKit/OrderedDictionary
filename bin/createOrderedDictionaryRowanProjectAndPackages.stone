@@ -34,6 +34,12 @@ USAGE
 
 DESCRIPTION
   Script to create the Rowan project metadata for the OrderedDictionary project.
+  
+	This project is using filetree with Monticello metadata and Rowan does not write
+  Monticello metadata, so in the short term I will write things out in tonel format;
+  and then merge in the latest OrderedDictionary work from Pharo (in tonel format)
+	remove Monticello metadata from the filetree packages and recopy the code back to
+	filetree.
 
 OPTIONS
   <stone-name>               Name of the GsDevKit_home stone. <stone-name> argument
@@ -55,8 +61,30 @@ EXAMPLES
   $basename -- -l -I .topazini
 -----
 %
+method
+definedProjectForCommon: projectName
+	^ (Rowan newProjectNamed: projectName)
+		gemstoneSetDefaultSymbolDictNameTo: 'Globals';
+		repoType: #git;	
+		customConditionalAttributes: #('tests' );
+		packageConvention: 'Monticello';
+		projectSpecPath: 'rowan';	
+		projectsPath: 'rowan/projects';
+		specsPath: 'rowan/specs';
+		projectsPath: 'rowan/projects';
+		projectSpecFile: 'rowan/project.ston';
+		packagesPath: 'src';
+		componentsPath: 'rowan/components';
+		yourself.
+%
+method
+definedProjectForFiletree: projectName
+	^ (self definedProjectForCommon: projectName)
+		packageFormat: 'filetree';
+		yourself.
+%
 doit
-	| projectName componentName commonPackageNames definedProject testPackageNames testsComponent |
+	| projectName componentName commonPackageNames definedProject testPackageNames testsComponent resolvedProject projectDefinition |
 
 	projectName := 'OrderedDictionary'.
 	componentName := 'Core'.
@@ -69,21 +97,7 @@ doit
 
 	('$ROWAN_PROJECTS_HOME' asFileReference / projectName / 'rowan') ensureDeleteAll.
 
-	definedProject := Rowan newProjectNamed: projectName.
-	definedProject
-		gemstoneSetDefaultSymbolDictNameTo: 'Globals';
-		repoType: #git;	
-		customConditionalAttributes: #('tests' );
-		packageFormat: 'filetree';
-		packageConvention: 'Monticello';
-		projectSpecPath: 'rowan';	
-		projectsPath: 'rowan/projects';
-		specsPath: 'rowan/specs';
-		projectsPath: 'rowan/projects';
-		projectSpecFile: 'rowan/project.ston';
-		packagesPath: 'src';
-		componentsPath: 'rowan/components';
-		yourself.
+	definedProject := self definedProjectForFiletree: projectName.
 	definedProject addTopLevelComponentNamed: componentName.
 	commonPackageNames do: [:packageName |
 			definedProject 
@@ -102,8 +116,27 @@ doit
 		addComponentNamed: testsComponent name 
 		toComponentNamed: componentName.
 
-	definedProject resolve	"create or attach to existing repository"
-	write.									"write to disk"
+	
+	resolvedProject := definedProject resolve _resolvedProject.
+	Rowan projectTools createV2
+		createResolvedProjectRepository: resolvedProject repository.
+	resolvedProject 
+		exportProjectSpecification;
+		exportProjects;
+		exportComponents;
+		yourself.
+	resolvedProject read.
+	projectDefinition := resolvedProject _projectDefinition copy.
+
+	"convert to tonel packages and write"
+	definedProject
+		packageFormat: 'tonel';
+		packagesPath: 'tonel';
+		yourself.
+
+	resolvedProject := definedProject resolve.
+	resolvedProject _resolvedProject _projectDefinition: projectDefinition.
+	resolvedProject write.
 
 	^ self noResult
 %
