@@ -60,7 +60,7 @@ OrderedDictionaryTest >> assertIsDictionary: aFirstDictionary copiedFrom: aSecon
     deny: aFirstDictionary dictionary == aSecondDictionary dictionary;
     deny: aFirstDictionary orderedKeys == aSecondDictionary orderedKeys.	"esnure the associations were copied (the keys and values can be shared)"
   aFirstDictionary associations
-    do: [ :each | self deny: (aSecondDictionary associations identityIncludes: each) ].
+    do: [ :each | self deny: (aSecondDictionary associations includesIdentical: each) ].
   self
     assertIsDictionary: aFirstDictionary
     withOrderedAssociations: anAssociationCollection
@@ -120,7 +120,7 @@ OrderedDictionaryTest >> changedOrderedAssociations [
 
 { #category : 'accessing' }
 OrderedDictionaryTest >> changedOrderedAssociationsFirst: anInteger [
-  ^ self changedOrderedAssociations first: anInteger
+  ^ self changedOrderedAssociations copyFirst: anInteger
 ]
 
 { #category : 'accessing' }
@@ -248,7 +248,7 @@ OrderedDictionaryTest >> orderedAssociationsAllButFirst: anInteger [
 
 { #category : 'accessing' }
 OrderedDictionaryTest >> orderedAssociationsFirst: anInteger [
-  ^ self orderedAssociations first: anInteger
+  ^ self orderedAssociations copyFirst: anInteger
 ]
 
 { #category : 'accessing' }
@@ -258,7 +258,7 @@ OrderedDictionaryTest >> orderedKeys [
 
 { #category : 'accessing' }
 OrderedDictionaryTest >> orderedKeysFirst: anInteger [
-  ^ self orderedKeys first: anInteger
+  ^ self orderedKeys copyFirst: anInteger
 ]
 
 { #category : 'accessing' }
@@ -268,7 +268,7 @@ OrderedDictionaryTest >> orderedValues [
 
 { #category : 'accessing' }
 OrderedDictionaryTest >> orderedValuesFirst: anInteger [
-  ^ self orderedValues first: anInteger
+  ^ self orderedValues copyFirst: anInteger
 ]
 
 { #category : 'accessing' }

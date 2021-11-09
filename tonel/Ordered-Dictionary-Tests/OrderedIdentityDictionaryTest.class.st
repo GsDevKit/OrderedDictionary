@@ -1,7 +1,6 @@
 Class {
 	#name : 'OrderedIdentityDictionaryTest',
 	#superclass : 'OrderedDictionaryTest',
-	#type : 'variable',
 	#category : 'Ordered-Dictionary-Tests'
 }
 

@@ -1,7 +1,6 @@
 Class {
 	#name : 'OrderedIdentityDictionary',
 	#superclass : 'OrderedDictionary',
-	#type : 'variable',
 	#category : 'Ordered-Dictionary'
 }
 

@@ -1,7 +1,6 @@
 Class {
 	#name : 'OrderedDictionary',
 	#superclass : 'Collection',
-	#type : 'variable',
 	#instVars : [
 		'dictionary',
 		'orderedKeys'
