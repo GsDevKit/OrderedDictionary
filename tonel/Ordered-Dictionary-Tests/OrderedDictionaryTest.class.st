@@ -49,7 +49,7 @@ OrderedDictionaryTest >> assertDictionary: aFirstDictionary equals: aSecondDicti
 { #category : 'assertions' }
 OrderedDictionaryTest >> assertIsArray: anArray withElements: aCollection [
   self
-    assert: anArray isArray;
+    assert: (anArray isKindOf: Array);
     assert: anArray = aCollection asArray
 ]
 
@@ -187,7 +187,7 @@ OrderedDictionaryTest >> internalDictionaryClass [
 
 { #category : 'accessing' }
 OrderedDictionaryTest >> internalDictionaryWithAssociations [
-  ^ self internalDictionaryClass newFrom: self orderedAssociations
+  ^ self internalDictionaryClass withAll: self orderedAssociations
 ]
 
 { #category : 'testing' }

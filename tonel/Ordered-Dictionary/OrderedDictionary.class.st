@@ -465,7 +465,7 @@ OrderedDictionary >> removeKeys: aKeyCollection [
       aKeyCollection size = 1
         ifTrue: [ 
           "use #anyOne, because it can be a Set"
-          self removeKey: aKeyCollection anyOne ifAbsent: [ nil ] ] ]
+          self removeKey: aKeyCollection any ifAbsent: [ nil ] ] ]
 ]
 
 { #category : 'removing' }
