@@ -56,7 +56,7 @@ doit
 	testSuite := (Rowan projectNamed: 'OrderedDictionary') testSuite.
 	testResult := testSuite run.
 	testResult printOn: self stdout.
-	(testResult hasFailure or: [ testResult hasErrors ])
+	(testResult hasFailures or: [ testResult hasErrors ])
 		ifTrue: [ self exitWithStatus: 1 ].
 	^ self noResult
 %
