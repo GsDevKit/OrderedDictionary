@@ -24,10 +24,11 @@ jobs:
         uses: dalehenrich/setup-superDoit@v2.0
         with:
           gemstone-version: ${{ matrix.gsvers }}
-          superDoit-source: ${{ github.workspace }}
       - name: test
         run: |
           echo SUPERDOIT_ROOT=$SUPERDOIT_ROOT
+        env:
+          SUPERDOIT_ROOT: ${{ steps.setup-superDoit.outputs.superDoit-root }}
 #  slack-workflow-status:
 #    if: always()
 #    name: Post Workflow Status To Slack
