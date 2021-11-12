@@ -49,7 +49,7 @@ file:$GITHUB_WORKSPACE/rowan/specs/OrderedDictionary.ston
 doit
 	self preDoitSpecLoad: [:loadSpec |
 		loadSpec 
-			customConditionalAttributes: (loadSpec customConditionalAttributes, #('tests');
+			customConditionalAttributes: (loadSpec customConditionalAttributes, #('tests'));
 			projectsHome: '$GITHUB_WORKSPACE/..'
 		].
 	testSuite := (Rowan projectNamed: 'OrderedDictionary') testSuite.
