@@ -28,7 +28,7 @@ jobs:
       - name: test
         run: |
           echo SUPERDOIT_ROOT=$SUPERDOIT_ROOT
-          .superDoitCI.solo
+          ./.superDoitCI.solo
         env:
           SUPERDOIT_ROOT: ${{ steps.setup-superDoit.outputs.superDoit-root }}
           GEMSTONE: ${{ steps.setup-superDoit.outputs.gemstone-product-path }}
