@@ -28,9 +28,11 @@ jobs:
       - name: test
         run: |
           echo SUPERDOIT_ROOT=$SUPERDOIT_ROOT
-          pwd
+          .superDoitCI.solo
         env:
           SUPERDOIT_ROOT: ${{ steps.setup-superDoit.outputs.superDoit-root }}
+          GEMSTONE: ${{ steps.setup-superDoit.outputs.gemstone-product-path }}
+          TOPAZINI_PATH: ${{steps.setup-superDoit.outputs.topazini-path}}
 #  slack-workflow-status:
 #    if: always()
 #    name: Post Workflow Status To Slack
