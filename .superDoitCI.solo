@@ -47,6 +47,7 @@ specUrls
 file:$GITHUB_WORKSPACE/rowan/specs/OrderedDictionary.ston
 %
 doit
+	| testSuite testResult |
 	self preDoitSpecLoad: [:loadSpec |
 		loadSpec 
 			customConditionalAttributes: (loadSpec customConditionalAttributes, #('tests'));
