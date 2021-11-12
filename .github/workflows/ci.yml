@@ -19,14 +19,14 @@ jobs:
       GS_VERS: ${{ matrix.gsvers }}
       PLATFORM: ${{ matrix.os }}
     steps:
-      - env:
-        SUPERDOIT_ROOT: ${{ steps.setup-superDoit.outputs.superDoit-root }}
       - uses: actions/checkout@v2
       - id: setup-superDoit
         uses: dalehenrich/setup-superDoit@v2.0
         with:
           gemstone-version: ${{ matrix.gsvers }}
           superDoit-source: ${{ github.workspace }}
+        env:
+          SUPERDOIT_ROOT: ${{ steps.setup-superDoit.outputs.superDoit-root }}
       - name: test
         run: |
           echo SUPERDOIT_ROOT=$SUPERDOIT_ROOT
