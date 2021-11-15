@@ -25,14 +25,6 @@ jobs:
         with:
           gemstone-version: ${{ matrix.gsvers }}
           superDoit-branch: 'v2.0'
-      - name: Setup SSH Keys and known_hosts
-        run: |
-          mkdir -p ~/.ssh
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
-          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
-          ssh-add - <<< "${{ secrets.SSH_PRIVATE_KEY }}"
-        env:
-          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
       - name: test
         run: |
           echo SUPERDOIT_ROOT=$SUPERDOIT_ROOT
@@ -42,7 +34,7 @@ jobs:
           SUPERDOIT_ROOT: ${{ steps.setup-superDoit.outputs.superDoit-root }}
           GEMSTONE: ${{ steps.setup-superDoit.outputs.gemstone-product-path }}
           TOPAZINI_PATH: ${{steps.setup-superDoit.outputs.topazini-path}}
-          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+          GITHUB_TOKEN: ${{ github.token }}
 #  slack-workflow-status:
 #    if: always()
 #    name: Post Workflow Status To Slack
