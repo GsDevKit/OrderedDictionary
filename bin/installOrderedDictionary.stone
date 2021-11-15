@@ -74,24 +74,6 @@ RwLoadSpecificationV2 {
 		}
 	},
 	#comment : ''
-},
-RwLoadSpecificationV2 {
-	#projectName : 'GsBasePharoCompatibiity',
-	#projectSpecFile : 'rowan/project.ston',
-	#componentNames : [
-		'Core'
-	],
-	#customConditionalAttributes : [
-		'tests'
-	],
-	#platformProperties : {
-		'gemstone' : {
-			'allusers' : {
-				#defaultSymbolDictName : 'Globals'
-			}
-		}
-	},
-	#comment : ''
 }
 ]
 %
