@@ -25,6 +25,9 @@ jobs:
         with:
           gemstone-version: ${{ matrix.gsvers }}
           superDoit-branch: 'v2.0'
+      - uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
       - name: test
         run: |
           echo SUPERDOIT_ROOT=$SUPERDOIT_ROOT
