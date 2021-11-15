@@ -25,7 +25,7 @@ jobs:
         with:
           gemstone-version: ${{ matrix.gsvers }}
           superDoit-branch: 'v2.0'
-       - name: Setup SSH Keys and known_hosts
+      - name: Setup SSH Keys and known_hosts
           env:
             SSH_AUTH_SOCK: /tmp/ssh_agent.sock
           run: |
