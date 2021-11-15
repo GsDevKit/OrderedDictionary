@@ -28,8 +28,13 @@ jobs:
       - uses: webfactory/ssh-agent@v0.5.3
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh-auth-sock: /tmp/ssh_agent.sock
       - name: test
         run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+          ssh-add - <<< "${{ secrets.SSH_PRIVATE_KEY }}"
           echo SUPERDOIT_ROOT=$SUPERDOIT_ROOT
           export PATH=$SUPERDOIT_ROOT/bin:$PATH
           ./.superDoitCI.solo -D
@@ -37,7 +42,7 @@ jobs:
           SUPERDOIT_ROOT: ${{ steps.setup-superDoit.outputs.superDoit-root }}
           GEMSTONE: ${{ steps.setup-superDoit.outputs.gemstone-product-path }}
           TOPAZINI_PATH: ${{steps.setup-superDoit.outputs.topazini-path}}
-          GITHUB_TOKEN: ${{ github.token }}
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
 #  slack-workflow-status:
 #    if: always()
 #    name: Post Workflow Status To Slack
