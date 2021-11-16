@@ -1040,7 +1040,7 @@ OrderedDictionaryTest >> testKeysSortedSafely [
       dictionary add: each.	"The keys are all strings, so the default #sorted implementation is OK."
       self
         assertIsArray: dictionary keysSortedSafely
-        withElements: (self orderedKeysFirst: i) sorted ]
+        withElements: (self orderedKeysFirst: i) asSortedCollection ]
 ]
 
 { #category : 'tests' }
