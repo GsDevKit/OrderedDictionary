@@ -1040,7 +1040,7 @@ OrderedDictionaryTest >> testKeysSortedSafely [
       dictionary add: each.	"The keys are all strings, so the default #sorted implementation is OK."
       self
         assertIsArray: dictionary keysSortedSafely
-        withElements: (self orderedKeysFirst: i) sorted ]
+        withElements: (self orderedKeysFirst: i) asSortedCollection ]
 ]
 
 { #category : 'tests' }
@@ -1195,9 +1195,9 @@ OrderedDictionaryTest >> testSize [
 OrderedDictionaryTest >> testStoreOn [
 	| print |
 	print := String streamContents: [ :s | self orderedAssociations storeOn: s ].
-	self assertDictionary: (Object readFromString:  print) equals: self orderedAssociations.
+	self assertDictionary: print evaluate equals: self orderedAssociations.
 	print := String streamContents: [ :s | self emptyDictionary storeOn: s ].
-	self assertDictionary: (Object readFromString:  print) equals: self emptyDictionary
+	self assertDictionary: print evaluate equals: self emptyDictionary
 ]
 
 { #category : 'tests' }
