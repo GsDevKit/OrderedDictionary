@@ -1195,9 +1195,9 @@ OrderedDictionaryTest >> testSize [
 OrderedDictionaryTest >> testStoreOn [
 	| print |
 	print := String streamContents: [ :s | self orderedAssociations storeOn: s ].
-	self assertDictionary: (Object readFromString:  print) equals: self orderedAssociations.
+	self assertDictionary: print evaluate equals: self orderedAssociations.
 	print := String streamContents: [ :s | self emptyDictionary storeOn: s ].
-	self assertDictionary: (Object readFromString:  print) equals: self emptyDictionary
+	self assertDictionary: print evaluate equals: self emptyDictionary
 ]
 
 { #category : 'tests' }
