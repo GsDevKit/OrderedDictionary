@@ -43,8 +43,8 @@ doit
 		loadSpec projectName = 'OrderedDictionary'
 			ifTrue: [ 
 				loadSpec 
-					customConditionalAttributes: (loadSpec customConditionalAttributes, #('tests'));
-					projectsHome: '$GITHUB_WORKSPACE/..' ] ].
+					customConditionalAttributes: (loadSpec customConditionalAttributes, #('tests')) ].
+		loadSpec projectsHome: '$GITHUB_WORKSPACE/..' ].
 	testSuite := (Rowan projectNamed: 'OrderedDictionary') testSuite.
 	runner := (Rowan globalNamed: 'GsTestStatsCITestRunner') runSuite: testSuite.
 	reporter := (Rowan globalNamed: 'GsTestStatsCITestReporterStdout') report: runner.
