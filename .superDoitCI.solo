@@ -54,7 +54,9 @@ doit
 		loadSpec projectsHome: '$GITHUB_WORKSPACE/..' ].
 	testSuite := (Rowan projectNamed: projectName) testSuite.
 	runner := (Rowan globalNamed: 'GsTestStatsCITestRunner') runSuite: testSuite.
-	reporter := (Rowan globalNamed: 'GsTestStatsCITestReporterStdout') reportNotPassing: runner.
+	reporter := self notPassing
+		ifTrue: [ (Rowan globalNamed: 'GsTestStatsCITestReporterStdout') reportNotPassing: runner ]
+		ifFalse: [ (Rowan globalNamed: 'GsTestStatsCITestReporterStdout') report: runner ].
 	runner isSuccessful
 		ifFalse: [ self exitWithStatus: 1 ].
 	^ self noResult
