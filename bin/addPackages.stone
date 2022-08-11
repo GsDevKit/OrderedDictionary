@@ -28,6 +28,7 @@ options
 {
 	SuperDoitOptionalOptionWithRequiredArg long: 'symbolDictName'.
 	SuperDoitOptionalOptionWithRequiredArg long: 'componentName' default: 'Core'.
+	SuperDoitOptionalOptionWithNoArg long: 'load'.
 }
 %
 usage
@@ -61,6 +62,9 @@ EXAMPLES
 
   installDataFrame.stone -D -- -l -I .topazini
   $basename -D addPackage OrderedDictionary platform/gs3.6- gs3.[6-]  OrderedDictionary-GemStone36- --symbolDictName=Globals -- -l -I .topazini
+
+  installDataFrame.stone -D -- -l -I .topazini
+  $basename -D addPackage OrderedDictionary platform/gs3.6- gs3.[6-]  OrderedDictionary-GemStone36- --symbolDictName=Globals --load -- -l -I .topazini
 -----
 %
 instvars
@@ -73,7 +77,7 @@ writeAndReloadProject
 		_resolvedProject: definedProject _resolvedProject;
 		yourself.
 	resolvedProject export.
-	^ resolvedProject load.
+	self load ifTrue: [ resolvedProject load ].
 %
 doit
 	| command components packages projectName componentName condition |
