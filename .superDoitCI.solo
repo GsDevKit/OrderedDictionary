@@ -1,0 +1,63 @@
+#!/usr/bin/env superdoit_solo
+options
+{
+	SuperDoitOptionalOptionWithNoArg long: 'notPassing'.
+}
+%
+usage
+-----
+USAGE $basename [--help | -h] [--debug | -D]
+
+DESCRIPTION
+  Run test suite for OrderedDictionary. Also used to run github ci runs.
+
+OPTIONS
+  -h, --help                 display usage message
+  -D, --debug                bring up topaz debugger in the event of a script error
+
+EXAMPLES
+  $basename --help
+  $basename -h
+  $basename --debug
+  $basename -D
+  $basename              # display detailed results for all tests
+  $basename --notPassing # display detailed results for only non passing tests 
+-----
+%
+specs
+[
+RwLoadSpecificationV2 {
+	#specName : 'GsTestStats',
+	#projectName : 'GsTestStats',
+	#gitUrl : 'https://github.com/dalehenrich/GsTestStats',
+	#revision : 'v1',
+	#projectSpecFile : 'rowan/project.ston',
+	#componentNames : [
+		'Samples'
+	],
+	#customConditionalAttributes : [],
+	#comment : 'test results tracking'
+}
+]
+%
+specUrls
+file:$GITHUB_WORKSPACE/rowan/specs/OrderedDictionary.ston
+%
+doit
+	| testSuite runner reporter projectName |
+	projectName := 'OrderedDictionary'.
+	self preDoitSpecLoad: [:loadSpec |
+		loadSpec projectName = projectName
+			ifTrue: [ 
+				loadSpec 
+					customConditionalAttributes: (loadSpec customConditionalAttributes, #('tests')) ].
+		loadSpec projectsHome: '$GITHUB_WORKSPACE/..' ].
+	testSuite := (Rowan projectNamed: projectName) testSuite.
+	runner := (Rowan globalNamed: 'GsTestStatsCITestRunner') runSuite: testSuite.
+	reporter := self notPassing
+		ifTrue: [ (Rowan globalNamed: 'GsTestStatsCITestReporterStdout') reportNotPassing: runner ]
+		ifFalse: [ (Rowan globalNamed: 'GsTestStatsCITestReporterStdout') report: runner ].
+	runner isSuccessful
+		ifFalse: [ self exitWithStatus: 1 ].
+	^ self noResult
+%
