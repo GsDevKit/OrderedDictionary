@@ -61,10 +61,10 @@ EXAMPLES
   $basename -D addPackage RowanSample1 platform/gs3.6- gs3.[6-]  RowanSample1-GemStone36- --symbolDictName=Globals -- -l -I .topazini
 
   installDataFrame.stone -D -- -l -I .topazini
-  $basename -D addPackage OrderedDictionary platform/gs3.6- gs3.[6-]  OrderedDictionary-GemStone36- --symbolDictName=Globals -- -l -I .topazini
+  $basename -D addPackage OrderedDictionary platform/gs3.6- gs3.[6-]  Ordered-Dictionary-GemStone36- --symbolDictName=Globals -- -l -I .topazini
 
   installDataFrame.stone -D -- -l -I .topazini
-  $basename -D addPackage OrderedDictionary platform/gs3.6- gs3.[6-]  OrderedDictionary-GemStone36- --symbolDictName=Globals --load -- -l -I .topazini
+  $basename -D addPackage OrderedDictionary platform/gs3.6- gs3.[6-]  Ordered-Dictionary-GemStone36- --symbolDictName=Globals --load -- -l -I .topazini
 -----
 %
 instvars

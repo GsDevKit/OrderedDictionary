@@ -7,7 +7,7 @@ RwPlatformNestedProjectLoadComponentV2 {
 		'GsBasePharoCompatibility'
 	],
 	#packageNames : [
-		'OrderedDictionary-GemStone36-'
+		'Ordered-Dictionary-GemStone36-'
 	],
 	#comment : ''
 }
